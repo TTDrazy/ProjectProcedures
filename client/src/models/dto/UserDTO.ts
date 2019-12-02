@@ -1,5 +1,6 @@
 import validator from 'validator';
 import { message} from 'antd';
+import Encryption from '../../utils/encryption/Encryption';
 
 export default class UserDTO{
     private userName:string;
@@ -16,6 +17,9 @@ export default class UserDTO{
         }else if(validator.isEmpty(this.password)){
             message.warning('密码不可以为空啦╭(╯^╰)╮');
             isQualified = false;
+        }else{
+            //进行 Md5 加密,为了不在发送 post 请求时暴露密码信息
+            this.password = Encryption.stringToMd5(this.password);
         }
         return isQualified;
     }
