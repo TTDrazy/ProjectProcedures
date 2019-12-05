@@ -1,8 +1,8 @@
-import Axios from "axios";
+import Axios from "../utils/axios/Axios";
 import UserDTO from "../models/dto/UserDTO";
 
 export default class UserAPI {
     async login(userDto: UserDTO) {
-        return await Axios.post("http://localhost:3100/login", userDto);
+        return await Axios.post("login", userDto);
     }
 }

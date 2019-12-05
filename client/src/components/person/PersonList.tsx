@@ -17,12 +17,14 @@ export default class PersonList extends React.Component<
     componentDidMount() {
         let personService = new PersonService();
         personService.getPersonList().then(personData => {
+            console.log(personData);
             this.setState({
                 personList: personData
             });
         });
     }
     public render() {
+        //console.log(this.state.personList);
         return (
             <div>
                 <ul>

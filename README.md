@@ -16,3 +16,4 @@
  6. utils (axios,encryption)
  7. api
  8. routers
+ 9. store

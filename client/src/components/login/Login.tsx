@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Input, Button } from "antd";
+import { Input, Button,message } from "antd";
 import UserService from "../../services/UserService";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
@@ -27,8 +27,9 @@ class Login extends React.Component<ILoginProps, ILoginState> {
         let userService = new UserService();
         userService.login(userName, password).then(isLogin => {
             if (isLogin) {
-                //跳转至登陆成功页面
-                this.props.history.push('login/success');
+                message.info('登录成功！');
+                //跳转至用户信息显示页面
+                this.props.history.push('/person');
             }
         });
     };

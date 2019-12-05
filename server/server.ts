@@ -10,8 +10,8 @@ let app = express();
 //设置允许跨域
 app.all("*", function(req: any, res: any, next: any) {
     res.header("Access-Control-Allow-Origin", "*");
-    //Access-Control-Allow-Headers ,可根据浏览器的F12查看,把对应的粘贴在这里就行
-    res.header("Access-Control-Allow-Headers", "Content-Type");
+    //为了简便，全部设置
+    res.header("Access-Control-Allow-Headers", "*");
     res.header("Access-Control-Allow-Methods", "*");
     res.header("Content-Type", "application/json;charset=utf-8");
     next();
@@ -42,6 +42,16 @@ app.post("/login", function(req: any, res: any) {
     }
     res.json(result);
     res.end();
+});
+
+//设置后台拦截器，拦截下req.headers['token'],确认在后台中是否存在
+//存在则继续，不存在提示
+app.use((req: any, res: any, next: any) => {
+    if (tokenList.has(req.headers["token"])) {
+        next();
+    } else {
+        res.json(new Result("009", "您未登陆成功，没有访问权限！", {}));
+    }
 });
 //get personlist 请求
 app.get("/personlist", (req: any, res: any) => {

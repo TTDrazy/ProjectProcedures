@@ -1,8 +1,8 @@
-import Axios from "axios";
+import Axios from "../utils/axios/Axios";
 
 export default class PersonAPI{
     //get 所有person 
     async getPersonList(){
-        return await Axios.get('http://localhost:3100/personlist');
+        return await Axios.get('personlist');
     }
 }
